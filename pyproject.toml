@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "kakao-chatbot"
 version = "0.2.0"
-description = "Effortlessly build KakaoTalk chatbots with Python objects - say goodbye to complex JSON and hello to streamlined development."
+description = "Effortlessly build KakaoTalk chatbots with Python objects - say goodbye to complex JSON and hello to streamlined development. test message"
 authors = ["Han Lee <hanlee@indiemaker.kr>", "Seokyoung Hong <seokyoung@sio2.kr>"]
 readme = "README.md"
 packages = [{include = "kakao_chatbot"}]
