@@ -35,11 +35,12 @@ jobs:
       - name: Determine version bump type
         id: version_type
         run: |
-          if [[ "$(jq -r '.labels[].name' <<< "${{ toJson(github.event.pull_request.labels) }}")" == *"major"* ]]; then
+          JSON_LABELS='${{ toJson(github.event.pull_request.labels) }}'
+          if echo "$JSON_LABELS" | jq -r '.[] | select(.name == "major")' >/dev/null; then
             echo "type=major" >> $GITHUB_ENV
-          elif [[ "$(jq -r '.labels[].name' <<< "${{ toJson(github.event.pull_request.labels) }}")" == *"minor"* ]]; then
+          elif echo "$JSON_LABELS" | jq -r '.[] | select(.name == "minor")' >/dev/null; then
             echo "type=minor" >> $GITHUB_ENV
-          elif [[ "$(jq -r '.labels[].name' <<< "${{ toJson(github.event.pull_request.labels) }}")" == *"patch"* ]]; then
+          elif echo "$JSON_LABELS" | jq -r '.[] | select(.name == "patch")' >/dev/null; then
             echo "type=patch" >> $GITHUB_ENV
           else
             echo "No version bump label found."
